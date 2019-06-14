@@ -1,5 +1,7 @@
 // file_loading.js
-// loads txt files into filestore for later use
+// loads txt files
+// converts txt files into matrices
+// stores matrices to filestore
 //
 
 // start script on load
@@ -32,7 +34,19 @@ $(document).ready(function() {
         reader.readAsBinaryString(files[i]);
         reader.onload = function(event) {
           // split result on every newline(\n)
+
+          // convert to numbers
           let splitted = event.target.result.split("\n");
+
+          // for matrix usage
+          for (j = 0; j < splitted.length; j++) {
+            // replace chars for numbers
+            splitted[j] = splitted[j].replace(/o/gi, "1").replace(/-/gi, "0");
+            // make array from string characters
+            splitted[j] = splitted[j].split("");
+            // cast strings-numbers to int
+            splitted[j] = splitted[j].map(Number);
+          }
 
           // save files in local storage
           if (name == "radar" || name == "invaders") {
