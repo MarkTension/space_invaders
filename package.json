@@ -1,0 +1,16 @@
+{
+  "name": "space_invaders",
+  "version": "1.0.0",
+  "description": "saving the world",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "markTension",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "read-text-file": "^1.1.0",
+    "requirejs": "^2.3.6"
+  }
+}
