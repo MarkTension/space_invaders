@@ -66,6 +66,7 @@ $(document).ready(function() {
       this.radar = radar;
       this.radar_rows = radar.size()[0];
       this.radar_cols = radar.size()[1];
+      console.log(this.radar_rows);
       this.column = 0;
       this.row = 0;
       this.similarities = [];
@@ -101,63 +102,10 @@ $(document).ready(function() {
         this.crawl();
       } else {
         //end
-        console.log("ended");
-        // if no more steps, plot histogram
-        console.log(this.similarities);
-        this.plot_histogram(this.similarities);
+        console.log("finished stepping");
+        // if no more steps, plot histogram --> process_data.js
+        process_data(this.similarities, this.radar);
       }
-    }
-
-    plot_histogram(data) {
-      var data2 = [];
-      var labels = [];
-
-      // bin data for histogram plot
-      for (var i = 0.5; i < 1; i += 0.01) {
-        var number = data.filter(item => item < i && item > i - 0.01);
-        data2.push(number.length);
-        labels.push(Math.round(i * 100) / 100);
-      }
-      // get the data
-      var ctx = document.getElementById("myChart");
-
-      var myChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              label: "similarity distribution",
-              data: data2,
-              borderWidth: 2,
-              backgroundColor: "rgba(255,239,213 ,1 )"
-            }
-          ]
-        },
-        options: {
-          responsive: false,
-          scales: {
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: "frequency"
-                }
-              }
-            ],
-            xAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: "similarity ratio (matching pixels/n_pixels)"
-                }
-              }
-            ]
-          }
-        }
-      });
-
-      console.log("done");
     }
 
     compare(inv_subset) {
@@ -169,9 +117,16 @@ $(document).ready(function() {
 
       var similarity_ratio =
         1 - difference / (inv_subset.size()[0] * inv_subset.size()[1]);
-      // save indices and similarity value as reference
 
-      this.similarities.push(similarity_ratio); //TODO: figure out statistical test
+      // save indices and similarity value as reference
+      var data_point = {
+        similarity_ratio: similarity_ratio,
+        size: inv_subset.size()[0] * inv_subset.size()[1],
+        row: this.row,
+        column: this.column
+      };
+
+      this.similarities.push(data_point); //TODO: figure out statistical test
     }
   }
 });
