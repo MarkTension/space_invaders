@@ -10,7 +10,8 @@
 <!-- for matrix usage  -->
 <script src="node_modules/mathjs/dist/math.js" type="text/javascript"></script>
 <!-- for histogram plotting -->
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 
 <link rel="stylesheet" href="index.css">
 </head>
@@ -26,6 +27,15 @@
 		<button class="button" id="start_button">find space invaders</button></center>
 
 	</div>
+	<div id="results">
+		<center>
+			<p class="paragraph">Results:</p>
+
+	<canvas id="myChart" width="400" height="400"></canvas>
+
+</center>
+
+</div>
 
 </body>
 </html>

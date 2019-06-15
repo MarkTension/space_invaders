@@ -41,6 +41,11 @@
   background-color: Ivory;
 }
 
+#results {
+  background-color: White;
+  display: none;
+}
+
 #myCanvas:focus {
   outline: 0 !important;
 }

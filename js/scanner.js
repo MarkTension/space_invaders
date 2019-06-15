@@ -19,6 +19,9 @@ $(document).ready(function() {
     if (invaders == null || radar == null) {
       alert("choose files first");
     } else {
+      // display results
+      document.getElementById("results").style.display = "block";
+
       // main script starts here
       invaders = separate(invaders); // unpack into array with parse
       // put each invader into a separate matrix
@@ -65,6 +68,7 @@ $(document).ready(function() {
       this.radar_cols = radar.size()[1];
       this.column = 0;
       this.row = 0;
+      this.similarities = [];
     }
 
     crawl() {
@@ -78,36 +82,96 @@ $(document).ready(function() {
         )
       );
 
+      // compare with original
       this.compare(inv_subset);
+      // check how to step
+      this.step();
+    }
 
-      // check if new column, row or finished
+    step() {
+      // check if new column, row or finished      TODO: make work for edge cases
       // column
       if (this.column + this.inv_columns < this.radar_cols) {
         //
         this.column++;
-      }
-      if (this.row + this.inv_rows < this.radar_rows) {
-        //
+        this.crawl();
+      } else if (this.row + this.inv_rows < this.radar_rows) {
+        this.column = 0;
         this.row++;
+        this.crawl();
+      } else {
+        //end
+        console.log("ended");
+        // if no more steps, plot histogram
+        console.log(this.similarities);
+        this.plot_histogram(this.similarities);
       }
-      // row
+    }
 
-      return 2;
+    plot_histogram(data) {
+      var data2 = [];
+      var labels = [];
+
+      // bin data for histogram plot
+      for (var i = 0.5; i < 1; i += 0.01) {
+        var number = data.filter(item => item < i && item > i - 0.01);
+        data2.push(number.length);
+        labels.push(Math.round(i * 100) / 100);
+      }
+      // get the data
+      var ctx = document.getElementById("myChart");
+
+      var myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "similarity distribution",
+              data: data2,
+              borderWidth: 2,
+              backgroundColor: "rgba(255,239,213 ,1 )"
+            }
+          ]
+        },
+        options: {
+          responsive: false,
+          scales: {
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "frequency"
+                }
+              }
+            ],
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "similarity ratio (matching pixels/n_pixels)"
+                }
+              }
+            ]
+          }
+        }
+      });
+
+      console.log("done");
     }
 
     compare(inv_subset) {
-      console.log("hello");
       var difference = math.subtract(inv_subset, this.inv);
       //flatten and take array
       difference = math.flatten(difference)["_data"];
       // reduce to sum
       difference = math.abs(difference.reduce((a, b) => a + b, 0));
+
+      var similarity_ratio =
+        1 - difference / (inv_subset.size()[0] * inv_subset.size()[1]);
       // save indices and similarity value as reference
-      this.save_similarity(difference);
+
+      this.similarities.push(similarity_ratio); //TODO: figure out statistical test
     }
-
-    save_similarity() {}
-
-    // plot curve
   }
 });
