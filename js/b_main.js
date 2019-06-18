@@ -74,7 +74,7 @@ $(document).ready(function() {
         radar.size() +
         "]. Invaders are recognized when matrix comparison yields a similarity ratio >" +
         ratio_boundary +
-        " . See README for more details on the classification.  </br>Histograms below show distribution of similarity ratios. Pink bars are positively classified. <br>This is useful to adjust classification threshold for different invader examples. </br></br>  The three images below visualize invaders classified on the radar, with a navy color for one type, and pink for the other type. Purple color is applied when both classifiers recognize the same invader";
+        " . See README for more details on the classification.  </br>Histograms below show distribution of similarity ratios. Pink bars are positively classified. <br>This is useful to adjust classification threshold for different invader examples. </br></br>  The three images below visualize invaders classified on the radar, with a navy color for one type, and pink for the other type. Purple color is applied when both classifiers recognize the same invader. A higher alpha of a color means it is classified with a higher confidence";
 
       // add two maps together, so both invaders are incorporated
       let scanned_radar = math.add(
