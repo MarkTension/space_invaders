@@ -8,10 +8,12 @@
 <script src="node_modules/p5/lib/p5.min.js"></script>
 
 <!--  import my scripts -->
-<script type="text/javascript" src="js/plot_figures.js"></script>
-<script type="text/javascript" src="js/process_data.js"></script>
-<script type="text/javascript" src="js/file_loading.js"></script>
-<script type="text/javascript" src="js/scanner.js"></script>
+<script type="text/javascript" src="js/e_plot_figures.js"></script>
+<script type="text/javascript" src="js/d_process_data.js"></script>
+<script type="text/javascript" src="js/a_file_loading.js"></script>
+<script type="text/javascript" src="js/c_crawler.js"></script>
+<script type="text/javascript" src="js/b_main.js"></script>
+
 
 <!-- for matrix usage  -->
 <script src="node_modules/mathjs/dist/math.js" type="text/javascript"></script>
@@ -26,7 +28,7 @@
 	<div id="container">
 		<center>
 			<img src="invader.png" width="8%" style='margin-top:1%'>
-		<p id="title">select both invaders.txt and radar.txt</p>
+		<p class="title">select both invaders.txt and radar.txt</p>
 		<p class="paragraph">👇</p>
 		<input class="button" type="file" id="files" name="files[]" multiple />
 
@@ -36,10 +38,15 @@
 	</div>
 	<div id="results">
 		<center>
-			<p class="paragraph">Results:</p>
-
-			<canvas id="myChart" width="400" height="400"></canvas>
-			<p class="paragraph">radar image</p>
+			<p class="title">Results:</p>
+			<div class ='row'>
+				<p class='paragraph' id='summary'></p>
+				<p class='paragraph'>first invader</p>
+				<canvas class='block' id="myChart0" width="300" height="300"></canvas>
+				<p class='paragraph'>second invader</p>
+				<canvas class='block' id="myChart1" width="300" height="300"></canvas>
+			<div>
+			<p class="paragraph">heat map --> radar with highlighted invaders --> isolated invaders</p>
 			<div id="sketch-div"></div>
 
 </center>

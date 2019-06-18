@@ -1,12 +1,3 @@
----oo---
---oooo--
--oooooo-
-oo-oo-oo
-oooooooo
---o--o--
--o-oo-o-
-o-o--o-o
-
 --o-----o--
 ---o---o---
 --ooooooo--
@@ -15,3 +6,12 @@ ooooooooooo
 o-ooooooo-o
 o-o-----o-o
 ---oo-oo---
+
+---oo---
+--oooo--
+-oooooo-
+oo-oo-oo
+oooooooo
+--o--o--
+-o-oo-o-
+o-o--o-o
