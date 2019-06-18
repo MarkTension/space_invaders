@@ -21,14 +21,31 @@ $(document).ready(function() {
       alert("choose files first");
     } else {
       /////////////////// main script starts here ///////////////////////////////////
+
+      // give each invader a separate array
+      invaders = separate(invaders);
+      radar = radar.filter(item => item.length > 0); // filter out empty arrays
+
+      // check if two invaders
+      if (invaders.length != 2) {
+        alert("please provide invaders file that includes two invaders");
+        throw "";
+      }
+      // check if invaders and radar are matrixable
+      try {
+        math.matrix(radar);
+        invaders.forEach(inv => math.matrix(inv));
+      } catch (err) {
+        alert("input is not rectangular --> not matrixable ");
+        throw "";
+      }
+
+      // put radar in matrix format
+      radar = math.matrix(radar);
+
       // display results html
       document.getElementById("results").style.display = "block";
 
-      // put radar in matrix format
-      radar = radar.filter(item => item.length > 0); // filter out empty arrays
-      radar = math.matrix(radar);
-      // give each invader a separate array
-      invaders = separate(invaders);
       // array for the results
       let results = []; // array for crawling results
       let data = [];
@@ -47,12 +64,11 @@ $(document).ready(function() {
       }
 
       document.getElementById("summary").innerHTML =
-        invaders.length +
-        " invaders were loaded. These are compared to radar of size [" +
+        "Two invaders are compared to radar of size [" +
         radar.size() +
         "]. Invaders were positively classified when matrix comparison yielded a similarity ratio >" +
         ratio_boundary +
-        " . See README for more details on the classification. Pink bars in histograms below show these cases. </br>  The three images visualize invaders classified on the radar, with a different color for invader type, and mixed color when invader is classified as both blue and pink";
+        " . See README for more details on the classification. Pink bars in histograms below show distribution of similarity ratios. </br>  The three images visualize invaders classified on the radar, with a different color for invader type, and mixed color when invader is classified as both blue and pink";
 
       // add two maps together, so both invaders are incorporated
       let scanned_radar = math.add(

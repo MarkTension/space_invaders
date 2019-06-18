@@ -69,7 +69,7 @@ class Crawler {
     difference = difference.reduce((a, b) => a + b, 0);
 
     // divide by number of pixels
-    let similarity_ratio =
+    const similarity_ratio =
       1 - difference / (radar_subset.size()[0] * radar_subset.size()[1]);
 
     // save indices and similarity value as reference
@@ -84,7 +84,7 @@ class Crawler {
     this.results.push(data_point);
   }
 
-  // trim invader example in edge cases
+  // trim invader example to compare in edge cases
   // trickiest part of the code. simple concept, but awkward syntax
   trim_inv(invader) {
     let indexer = [];
@@ -123,7 +123,6 @@ class Crawler {
         math.range(math.abs(this.row), this.inv_rows), // skip top rows
         math.range(0, col_correct) // don't skip columns
       );
-
       invader = math.subset(invader, indexer);
     }
 
@@ -140,10 +139,8 @@ class Crawler {
         math.range(0, this.radar_rows - this.row), // skip bottom rows
         math.range(0, col_correct) // don't skip columns
       );
-
       invader = math.subset(invader, indexer);
     }
-
     return invader;
   }
 }

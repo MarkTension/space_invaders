@@ -35,7 +35,7 @@ function process_data(data, radar, iteration, ratio_boundary) {
     let item = indexes[i];
 
     // create ones matrix the size of relevant subset
-    let ones = math.ones(item[0]._data.length, item[1]._data.length);
+    const ones = math.ones(item[0]._data.length, item[1]._data.length);
 
     // for heatmap, get current subset, and add ones to it
     let current_subset = heatmap.subset(math.index(item[0], item[1]));
@@ -49,14 +49,13 @@ function process_data(data, radar, iteration, ratio_boundary) {
   }
 
   // get heatmap maximum
-  let maximum = math.max(heatmap);
+  const maximum = math.max(heatmap);
   // normalize heatmap
   heatmap = math.divide(heatmap, maximum);
-  // replace 1 with 0.5
-  invader_map = math.multiply(invader_map, 10); // later will sort on > 10
-
+  // replace 1 with 10, useful later when sorting data >= 10
+  invader_map = math.multiply(invader_map, 10);
   // add invaders to radar
-  let scanned_radar = math.add(invader_map, radar);
+  const scanned_radar = math.add(invader_map, radar);
 
   return {
     scanned_radar: scanned_radar,
