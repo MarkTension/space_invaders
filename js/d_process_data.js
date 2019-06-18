@@ -5,14 +5,13 @@ function process_data(data, radar, iteration, ratio_boundary) {
   // first plot histogram for similarity ratios distribution (plot_figures.js)
   plot_histogram(data, "myChart" + iteration);
 
-  var matches = [];
+  let matches = [];
   // get highly likely invaders
   matches.push(data.filter(item => item.similarity_ratio >= ratio_boundary));
-  // TODO: try with top 5 frames instead of arbitrary 70% similarity
 
   // change these values in the radar
   // get array with only the indexes
-  var indexes = [];
+  let indexes = [];
 
   matches[0].forEach(item =>
     indexes.push([
@@ -26,13 +25,13 @@ function process_data(data, radar, iteration, ratio_boundary) {
 
   // create two empty matrices
   // map with highlighted invaders
-  var heatmap = math.zeros(radar.size()[0], radar.size()[1]);
+  let heatmap = math.zeros(radar.size()[0], radar.size()[1]);
   // map with highlighted invaders including noise
-  var invader_map = math.zeros(radar.size()[0], radar.size()[1]);
-  var highest = 0;
+  let invader_map = math.zeros(radar.size()[0], radar.size()[1]);
+  let highest = 0;
 
   // loop through invaders
-  for (var i = 0; i < indexes.length; i++) {
+  for (let i = 0; i < indexes.length; i++) {
     let item = indexes[i];
 
     // create ones matrix the size of relevant subset
@@ -57,7 +56,7 @@ function process_data(data, radar, iteration, ratio_boundary) {
   invader_map = math.multiply(invader_map, 10); // later will sort on > 10
 
   // add invaders to radar
-  var scanned_radar = math.add(invader_map, radar);
+  let scanned_radar = math.add(invader_map, radar);
 
   return {
     scanned_radar: scanned_radar,

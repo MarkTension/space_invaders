@@ -24,7 +24,7 @@ $(document).ready(function() {
     let files = evt.target.files;
 
     // loop files
-    for (i = 0; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       // create file reader for each file
       let reader = new FileReader();
       // get file name
@@ -39,7 +39,7 @@ $(document).ready(function() {
           let splitted = event.target.result.split("\n");
 
           // for matrix usage
-          for (j = 0; j < splitted.length; j++) {
+          for (let j = 0; j < splitted.length; j++) {
             // replace chars for numbers
             splitted[j] = splitted[j].replace(/o/gi, "1").replace(/-/gi, "0");
             // make array from string characters

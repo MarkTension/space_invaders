@@ -20,26 +20,26 @@ $(document).ready(function() {
     if (invaders == null || radar == null) {
       alert("choose files first");
     } else {
-      // display results
+      /////////////////// main script starts here ///////////////////////////////////
+      // display results html
       document.getElementById("results").style.display = "block";
 
-      // main script starts here
       // put radar in matrix format
       radar = radar.filter(item => item.length > 0); // filter out empty arrays
       radar = math.matrix(radar);
       // give each invader a separate array
       invaders = separate(invaders);
       // array for the results
-      var results = [];
-      var data = [];
-      const ratio_boundary = 0.7;
+      let results = []; // array for crawling results
+      let data = [];
+      const ratio_boundary = 0.7; // similarity ratio classification boundary
 
-      var crawlers = [];
+      let crawlers = [];
       for (var i = 0; i < invaders.length; i++) {
         // matrixify invader
         invader = math.matrix(invaders[i]);
         // make crawler instance for each invader
-        var crawl = new Crawler(invader, radar);
+        let crawl = new Crawler(invader, radar);
         results = crawl.step();
 
         // after getting similarity scores, start processing them
@@ -52,10 +52,10 @@ $(document).ready(function() {
         radar.size() +
         "]. Invaders were positively classified when matrix comparison yielded a similarity ratio >" +
         ratio_boundary +
-        ". The current boundary works well, but feel free to play with it in the code. See README for more details on the classification. Pink bars in histograms below show these cases. </br>  The three images visualize invaders classified on the radar, with a different color for invader type";
+        " . See README for more details on the classification. Pink bars in histograms below show these cases. </br>  The three images visualize invaders classified on the radar, with a different color for invader type, and mixed color when invader is classified as both blue and pink";
 
       // add two maps together, so both invaders are incorporated
-      var scanned_radar = math.add(
+      let scanned_radar = math.add(
         data[0].scanned_radar,
         data[1].scanned_radar
       );
@@ -84,11 +84,11 @@ $(document).ready(function() {
   // separate invaders
   function separate(invaders) {
     // array for separated invaders
-    var separated = [[]];
-    var idx = 0;
+    let separated = [[]];
+    let idx = 0;
 
     // cycle through array
-    for (var i = 0; i < invaders.length; i++) {
+    for (let i = 0; i < invaders.length; i++) {
       // load in separated-array until empty item
       if (invaders[i].length != 0) {
         separated[idx].push(invaders[i]);

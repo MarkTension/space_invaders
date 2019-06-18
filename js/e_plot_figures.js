@@ -1,16 +1,16 @@
 // plot histogram with charts.js
 function plot_histogram(data, canvas) {
-  var bins = [];
-  var labels = [];
-  var similarities = [];
+  let bins = [];
+  let labels = [];
+  let similarities = [];
   backgrounds = [];
 
   // extract similarity_ratio from data
   data.forEach(item => similarities.push(item.similarity_ratio));
   // bin similarity_ratio's for histogram plot
-  for (var i = 0.5; i < 1; i += 0.01) {
+  for (let i = 0.5; i < 1; i += 0.01) {
     // create bins of 0.01 (similarity) width
-    var number = similarities.filter(item => item < i && item > i - 0.01);
+    let number = similarities.filter(item => item < i && item > i - 0.01);
     bins.push(number.length);
     // round labels
     labels.push(Math.round(i * 100) / 100);
@@ -22,10 +22,10 @@ function plot_histogram(data, canvas) {
   }
 
   // get canvas
-  var ctx = document.getElementById(canvas);
+  let ctx = document.getElementById(canvas);
 
   // plot histogram
-  var myChart = new Chart(ctx, {
+  let myChart = new Chart(ctx, {
     type: "bar",
     data: {
       labels: labels,
@@ -67,9 +67,9 @@ function plot_heatmap(data0, data1) {
   startSketch();
 
   function startSketch() {
-    var sketch = function(p) {
+    let sketch = function(p) {
       p.setup = function() {
-        var canvas = p.createCanvas(800, 400);
+        const canvas = p.createCanvas(800, 400);
         canvas.parent("sketch-div");
       };
 
@@ -83,8 +83,8 @@ function plot_heatmap(data0, data1) {
 
         for (let i = 0; i < n_rows; i++) {
           for (let j = 0; j < n_cols; j++) {
-            var rows = i * height;
-            var cols = j * width;
+            let rows = i * height;
+            let cols = j * width;
 
             p.stroke("white");
 
@@ -102,7 +102,7 @@ function plot_heatmap(data0, data1) {
         }
       };
     };
-    var myp5 = new p5(sketch);
+    let myp5 = new p5(sketch);
   }
 }
 
@@ -110,9 +110,9 @@ function visualize_radar(radar, heatmap0, heatmap1, isolate) {
   startSketch();
 
   function startSketch() {
-    var sketch = function(p) {
+    let sketch = function(p) {
       p.setup = function() {
-        var canvas = p.createCanvas(800, 400);
+        let canvas = p.createCanvas(800, 400);
         canvas.parent("sketch-div");
       };
 
@@ -126,8 +126,8 @@ function visualize_radar(radar, heatmap0, heatmap1, isolate) {
 
         for (let i = 0; i < n_rows; i++) {
           for (let j = 0; j < n_cols; j++) {
-            var rows = i * height;
-            var cols = j * width;
+            let rows = i * height;
+            let cols = j * width;
 
             p.stroke("white");
 
@@ -135,11 +135,6 @@ function visualize_radar(radar, heatmap0, heatmap1, isolate) {
             if (radar[i][j] == 0) {
               p.fill("PapayaWhip");
             }
-            // empty pixel in heatmap: papayawhip
-            // else if (radar[i][j] > 0 && radar[i][j] < 10) {
-            //   p.fill("PapayaWhip");
-            // }
-
             // blank space in identified invader: papayawhip
             else if (radar[i][j] >= 10 && radar[i][j] % 10 == 0) {
               p.fill("papayawhip");
@@ -160,18 +155,18 @@ function visualize_radar(radar, heatmap0, heatmap1, isolate) {
               // if isolate, omit noise in radar
               if (isolate) {
                 p.fill("papayawhip");
-              } else {
-                // palevioletred with low alpha
+              }
+              // else add palevioletred noise to radar
+              else {
                 p.fill("rgba(219,112,147,0.1)");
               }
             }
-
-            // draw rectangle with  (x position, y position, width, height)
+            // draw rectangle
             p.rect(cols, rows, width, height);
           }
         }
       };
     };
-    var myp5 = new p5(sketch);
+    let myp5 = new p5(sketch);
   }
 }

@@ -39,12 +39,18 @@
 	<div id="results">
 		<center>
 			<p class="title">Results:</p>
+			<p class='paragraph' id='summary'></p>
 			<div class ='row'>
-				<p class='paragraph' id='summary'></p>
-				<p class='paragraph'>first invader</p>
-				<canvas class='block' id="myChart0" width="300" height="300"></canvas>
-				<p class='paragraph'>second invader</p>
-				<canvas class='block' id="myChart1" width="300" height="300"></canvas>
+				<div class='block'>
+					<p class='paragraph'>first invader</p>
+					<canvas id="myChart0" width="300" height="300"></canvas>
+				</div>
+				<div class='block'>
+					<p class='paragraph'>second invader</p>
+					<canvas id="myChart1" width="300" height="300"></canvas>
+				</div>
+			</div>
+
 			<div>
 			<p class="paragraph">heat map --> radar with highlighted invaders --> isolated invaders</p>
 			<div id="sketch-div"></div>

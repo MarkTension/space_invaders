@@ -11,10 +11,12 @@
 
 .row {
   width: 100%;
+  text-align: center;
 }
 
 .block {
   display: inline-block;
+  margin-right: 6px;
 }
 
 .paragraph {

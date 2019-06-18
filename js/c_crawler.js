@@ -20,7 +20,7 @@ class Crawler {
 
   step() {
     // make relevant subset of radar
-    var radar_subset = math.subset(
+    let radar_subset = math.subset(
       this.radar,
       math.index(
         math.range(
@@ -57,25 +57,23 @@ class Crawler {
 
   // compares subset with invader example
   compare(radar_subset) {
-    var invader = this.inv;
+    let invader = this.inv;
 
     // trim invader if edge case
     invader = this.trim_inv(invader);
 
     // do mean (squared) error:
-    var difference = math.subtract(radar_subset, invader);
+    let difference = math.subtract(radar_subset, invader);
     difference = math.square(difference);
     difference = math.flatten(difference)["_data"];
     difference = difference.reduce((a, b) => a + b, 0);
 
-    // TODO: difference = math.square(difference);
-
     // divide by number of pixels
-    var similarity_ratio =
+    let similarity_ratio =
       1 - difference / (radar_subset.size()[0] * radar_subset.size()[1]);
 
     // save indices and similarity value as reference
-    var data_point = {
+    let data_point = {
       similarity_ratio: similarity_ratio,
       size: radar_subset.size()[0] * radar_subset.size()[1],
       dims: radar_subset.size(),
@@ -89,9 +87,9 @@ class Crawler {
   // trim invader example in edge cases
   // trickiest part of the code. simple concept, but awkward syntax
   trim_inv(invader) {
-    var indexer = [];
-    var remaining_cols = false;
-    var col_correct = 0;
+    let indexer = [];
+    let remaining_cols = false;
+    let col_correct = 0;
 
     // if cols is negative, delete left part
     if (this.column < 0) {
