@@ -1,6 +1,6 @@
 # space_is_the_place
 
-Space_is_the_place displays invaders in a radar image.
+Space_is_the_place displays invaders in a radar image. 
 
 To start: Open index.html , select files, and press *find space invaders* button
 
@@ -18,6 +18,9 @@ The algorithm in short:
 - similarity_ratio's exceeding boundary of 0.7** are classified as invaders.
 - similarity values are visualized in the resulting figures (with the help of p5.js and charts.js)
 
+
+The current heatmap approach allows certainty to express itself through the alpha/opacity of the invaders' coloring; higher alpha symbolizes higher certainty.
+Because invaders look alike when enough noise is present, there might be some cases where one can be either. In such cases both crawler instances pick it up and the color is a combination of the two.
 
 <nowiki>*</nowiki> the similarity_ratio is calculated by:
 Getting residuals by subtracting example from sample-matrix. 
