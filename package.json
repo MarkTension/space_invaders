@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "fs": "0.0.1-security",
-    "mathjs": "^6.0.2",
+    "mathjs": "^7.5.1",
     "p5": "^0.8.0",
     "read-text-file": "^1.1.0",
     "requirejs": "^2.3.6"
